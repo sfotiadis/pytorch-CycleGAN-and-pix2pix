@@ -49,7 +49,7 @@ class Visualizer():
         if self.use_html:
             self.web_dir = os.path.join(opt.checkpoints_dir, opt.name, 'web')
             self.img_dir = os.path.join(self.web_dir, 'images')
-            print('create web directory %s...' % self.web_dir)
+            logging.info('create web directory %s...' % self.web_dir)
             util.mkdirs([self.web_dir, self.img_dir])
         self.log_name = os.path.join(opt.checkpoints_dir, opt.name, 'loss_log.txt')
         with open(self.log_name, "a") as log_file:
@@ -147,6 +147,6 @@ class Visualizer():
         for k, v in losses.items():
             message += '%s: %.3f ' % (k, v)
 
-        print(message)
+        logging.info(message)
         with open(self.log_name, "a") as log_file:
             log_file.write('%s\n' % message)

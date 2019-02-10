@@ -9,7 +9,7 @@ if __name__ == '__main__':
     data_loader = CreateDataLoader(opt)
     dataset = data_loader.load_data()
     dataset_size = len(data_loader)
-    print('#training images = %d' % dataset_size)
+    logging.info('#training images = %d' % dataset_size)
 
     model = create_model(opt)
     model.setup(opt)
@@ -43,17 +43,17 @@ if __name__ == '__main__':
                     visualizer.plot_current_losses(epoch, float(epoch_iter) / dataset_size, opt, losses)
 
             if total_steps % opt.save_latest_freq == 0:
-                print('saving the latest model (epoch %d, total_steps %d)' %
+                logging.info('saving the latest model (epoch %d, total_steps %d)' %
                       (epoch, total_steps))
                 model.save_networks('latest')
 
             iter_data_time = time.time()
         if epoch % opt.save_epoch_freq == 0:
-            print('saving the model at the end of epoch %d, iters %d' %
+            logging.info('saving the model at the end of epoch %d, iters %d' %
                   (epoch, total_steps))
             model.save_networks('latest')
             model.save_networks(epoch)
 
-        print('End of epoch %d / %d \t Time Taken: %d sec' %
+        logging.info('End of epoch %d / %d \t Time Taken: %d sec' %
               (epoch, opt.niter + opt.niter_decay, time.time() - epoch_start_time))
         model.update_learning_rate()

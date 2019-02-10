@@ -64,10 +64,10 @@ class BaseOptions():
 
         args = vars(opt)
 
-        print('------------ Options -------------')
+        logging.info('------------ Options -------------')
         for k, v in sorted(args.items()):
-            print('%s: %s' % (str(k), str(v)))
-        print('-------------- End ----------------')
+            logging.info('%s: %s' % (str(k), str(v)))
+        logging.info('-------------- End ----------------')
 
         if opt.suffix:
             suffix = ('_' + opt.suffix.format(**vars(opt))) if opt.suffix != '' else ''

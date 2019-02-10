@@ -17,7 +17,7 @@ class MnistSvhnDataset(BaseDataset):
     def initialize(self, opt):
         self.opt = opt
         self.root = opt.dataroot
-        print(opt)
+        logging.info(opt)
         self.mnist = MNIST(os.path.join(opt.dataroot, 'mnist'),
                            train=opt.isTrain, download=True)
         #svhn_mat_extra = scipy.io.loadmat(os.path.join(opt.dataroot,
@@ -42,7 +42,7 @@ class MnistSvhnDataset(BaseDataset):
     def shuffle_indices(self):
         self.mnist_indices = list(range(len(self.mnist)))
         self.svhn_indices = list(range(self.svhn.shape[0]))
-        print('num mnist', len(self.mnist_indices), 'num svhn', len(self.svhn_indices))
+        logging.info('%s %s %s %s'  %('num mnist', len(self.mnist_indices), 'num svhn', len(self.svhn_indices)))
         if not self.opt.serial_batches:
             random.shuffle(self.mnist_indices)
             random.shuffle(self.svhn_indices)
@@ -59,7 +59,7 @@ class MnistSvhnDataset(BaseDataset):
         A_img = A_img.resize((32, 32))
         A_img = A_img.convert('RGB')
         #A_img = np.expand_dims(np.array(A_img), 0)
-        #print('mnist after expand dims:', np.array(A_img).shape)
+        #logging.info('mnist after expand dims:', np.array(A_img).shape)
         #A_img = np.transpose(A_img, (1, 2, 0))
         A_img = self.transform(A_img)
         A_path = '%01d_%05d.png' % (A_label, index)

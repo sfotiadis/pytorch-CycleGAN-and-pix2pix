@@ -4,7 +4,7 @@ from data.base_data_loader import BaseDataLoader
 
 def CreateDataLoader(opt):
     data_loader = CustomDatasetDataLoader()
-    print(data_loader.name())
+    logging.info(data_loader.name())
     data_loader.initialize(opt)
     return data_loader
 
@@ -33,7 +33,7 @@ def CreateDataset(opt):
     else:
         raise ValueError("Dataset [%s] not recognized." % opt.dataset_mode)
 
-    print("dataset [%s] was created" % (dataset.name()))
+    logging.info("dataset [%s] was created" % (dataset.name()))
     dataset.initialize(opt)
     return dataset
 

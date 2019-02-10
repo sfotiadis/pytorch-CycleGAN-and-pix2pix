@@ -56,7 +56,7 @@ def init_weights(net, init_type='normal', gain=0.02):
             init.normal_(m.weight.data, 1.0, gain)
             init.constant_(m.bias.data, 0.0)
 
-    print('initialize network with %s' % init_type)
+    logging.info('initialize network with %s' % init_type)
     net.apply(init_func)
 
 
@@ -72,8 +72,8 @@ def print_network(net):
     num_params = 0
     for param in net.parameters():
         num_params += param.numel()
-    print(net)
-    print('Total number of parameters: %d' % num_params)
+    logging.info(net)
+    logging.info('Total number of parameters: %d' % num_params)
 
 
 def define_G(input_nc, output_nc, ngf, which_model_netG, norm='batch', use_dropout=False, init_type='normal', gpu_ids=[]):
